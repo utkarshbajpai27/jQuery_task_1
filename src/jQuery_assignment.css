@@ -1,0 +1,40 @@
+body{
+    text-align: center;
+    background-color: aliceblue;
+    font-family: monospace;
+    overflow:hidden;
+}
+
+
+.input{
+    display: block;
+    text-decoration: none;
+    font-family: cursive;
+    padding: 10px;
+}
+
+#submit{
+    background-color: aqua;
+    text-decoration: none;
+    font-size: larger;
+    margin: auto;
+    text-align: center;
+    margin-top:1.5%;
+}
+
+table{
+    margin:auto;
+    padding-top:20px;
+}
+
+tr{
+    font-size: xx-large;
+    
+
+
+th{
+    max-width:100%;
+    padding-left:60px;
+}
+
+}

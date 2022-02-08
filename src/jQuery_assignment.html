@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js assignment Product</title>
+    <link rel="stylesheet" href="jQuery_assignment.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jQuery_assignment.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="Header">
+        <h1>"Product Assignment using jQuery"</h1>
+        <h2>Enter details of your product</h2>
+      </div>
+      <div id="content">
+        <div id="input">
+          <label for="Name" class="input">Product SKU</label>
+          <input type="text" id="productId" required />
+          <label for="age" class="input"> Product Name</label>
+          <input type="text" id="productName" required />
+          <label for="weight" class="input"> Product Price</label>
+          <input type="text" id="productPrice" required />
+          <label for="Name" class="input">Product Quantity</label>
+          <input type="text" id="productQuantity" required />
+          <input
+            type="button"
+            id="submit"
+            class="input"
+            value="Click to Add product"
+          />
+        </div>
+        <div id="Error section">
+          <h1>This place is a Error section</h1>
+          </div>
+
+        <div id="table"></div>
+      </div>
+    </div>
+  </body>
+</html>
