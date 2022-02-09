@@ -22,6 +22,18 @@ body{
     margin-top:1.5%;
 }
 
+
+#update{
+    background-color: gold;
+    text-decoration: none;
+    font-size: larger;
+    margin: auto;
+    text-align: center;
+    margin-top:1.5%;
+    display:none;
+    
+}
+
 table{
     margin:auto;
     padding-top:20px;
@@ -30,11 +42,15 @@ table{
 tr{
     font-size: xx-large;
     
+}
 
 
 th{
     max-width:100%;
-    padding-left:60px;
+    background-color: deepskyblue;
+    text-align: center;
 }
 
-}
+
+
+    
