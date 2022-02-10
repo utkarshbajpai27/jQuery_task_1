@@ -26,17 +26,11 @@ $(document).ready(function(){
 
 
   $("body").on("click","#delProduct",function(){
-    $("#submit").hide();
-    $("#delete").show();
     console.log("Entered the Delete function");
-   var delId=$(this).data("id");
-    var delName=$("#productName").val();
-    var delPrice=$("#productPrice").val();
-    var delQuantity=$("#productQuantity").val();
-    $("#productId").val(delId);
-    $("#productNam e").val(delName);
-    $("#productPrice").val(delPrice);
-    $("#productQuantity").val(delQuantity);
+    var delId=$(this).data("id");
+    $(this).parents('tr').empty();
+    lists.splice(lists[i].pro_id==delId);
+    console.log(lists);
   });
 
   $("#update").click(function(){
@@ -47,38 +41,17 @@ $(document).ready(function(){
     var updateQuantity=$("#productQuantity").val();
     updateValidation(updateId,updateName,updatePrice,updateQuantity,lists);
   });
-
-
-  $("#delete").click(function(){
-    console.log("Entered the delete function");
-    var delId=$("#productId").val();
-    delValidation(delId,lists);
-});
 });
 
-function delValidation(delId,lists){
-  $("table").hide();
-}
+
 
 function updateValidation(updateId,updateName,updatePrice,updateQuantity,lists){
   console.log("Entered the update validation");
-  if (lists.length==0){
-    $("#error").css({"background-color": "red", "border-width": "1px",
-                    "border-style": "solid",
-                    "border-radius": "5px",
-                    "padding": "8px",
-                    "margin": "5px",
-                    "padding-left": "20px",
-                    "padding-right": "60%",
-                    "font-weight": "bold"});
-    $("#error").html("List is empty You cant update this list");
-    $("#error").fadeToggle(2000);
-    console.log("List is empty");
-  }else if (lists.length>=1){
+  if(lists.length>=1){
     console.log("List is not empty");
     for (i = 0; i < lists.length; i++){
       if(updateId == lists[i].pro_id){
-        console.log("Item with this id exists" +updateId);
+        console.log("Item with this id exists so you can update it");
         lists[i].pro_id=updateId;
         lists[i].pro_name=updateName;
         lists[i].pro_price=updatePrice;
@@ -86,7 +59,7 @@ function updateValidation(updateId,updateName,updatePrice,updateQuantity,lists){
         display(lists);
         $("#update").hide();
         $("#submit").show();
-        productAdded();
+       productAdded();
         
       }else{
         console.log("Item with this id doesn't exists in list");
@@ -130,18 +103,22 @@ function emptyField(id,name,price,quantity){
 console.log("You have entered the emptyfield function");
 if(id.length === 0){
   console.log("Id field is empty")
+  $("#productId").css("border-style","1px solid red");
   return -1;
 }
 if(name.length === 0){
 console.log("Name field is empty");
+$("#productName").css("border-style","1px solid red");
 return -1;
 }
 if(price.length === 0){
-  console.log("Price field is empty")
+  console.log("Price field is empty");
+  $("#productPrice").css("border-style","1px solid red");
   return -1;
 }
 if(quantity.length === 0){
-    console.log("quanity field is empty")
+    console.log("quanity field is empty");
+    $("#productQuantity").css("border-style","1px solid red");
     return -1;
 }else {
   console.log("All fields filled");
