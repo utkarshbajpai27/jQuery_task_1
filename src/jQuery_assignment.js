@@ -3,6 +3,7 @@ $(document).ready(function(){
   $("#submit").click(function(){
   $("#update").hide();
   var product=addItem();
+  console.log(lists);
   if (product!= -1){
     console.log("Entering the push array part");
     lists.push(product);
@@ -28,9 +29,17 @@ $(document).ready(function(){
   $("body").on("click","#delProduct",function(){
     console.log("Entered the Delete function");
     var delId=$(this).data("id");
-    $(this).parents('tr').empty();
-    lists.splice(lists[i].pro_id==delId);
-    console.log(lists);
+    let text = "Press a button!\nEither OK or Cancel.";
+    if (confirm(text) == true) {
+      for(i=0;i<lists.length;i++){
+        if(lists[i].pro_id==delId){
+          console.log("Value of index is "+i);
+          var index=i;
+        }
+      }
+      lists.splice(index,1);
+      display(lists);
+    }
   });
 
   $("#update").click(function(){
@@ -82,19 +91,97 @@ function updateValidation(updateId,updateName,updatePrice,updateQuantity,lists){
 
 function addItem(){
 var id=$("#productId").val();
+var aid=parseInt(id);
 var name=$("#productName").val();
 var price=$("#productPrice").val();
 var quantity=$("#productQuantity").val();
-var empty= emptyField(id,name,price,quantity);
-var check = validation(id, lists);
-if (!check && empty != -1) {
-  var data = { pro_id: id, pro_name: name, pro_price: price,pro_quantity: quantity};
-  productAdded(lists);
-  return data;
-} else {
-  console.log("Yes there is some error");
-  error(check,empty);
+var aquan=parseInt(quantity);
+var allField=id.length+name.length+price.length+quantity.length;
+console.log(allField);
+if(allField===0){
+  console.log("All field are empty")
+  fill();
   return -1;
+}
+if(isNaN(aid) || isNaN(aquan)){
+  idCheck(aid,aquan);
+  return -1
+}else if(Number(name)){
+  nameCheck(name);
+  return -1
+}else if(!isNaN(aid) && !isNaN(aquan)){
+  var empty= emptyField(id,name,price,quantity);
+  var check = validation(id, lists);
+  if(!check && empty != -1) {
+    var data = { pro_id: id, pro_name: name, pro_price: price,pro_quantity: quantity};
+    productAdded(lists);
+    return data;
+  }else {
+    console.log("Yes there is some error");
+    error(check,empty);
+    return -1;
+  }
+}
+}
+
+function fill(){
+  $("#error").css({"background-color": "red", "border-width": "1px",
+  "border-style": "solid",
+  "border-radius": "5px",
+  "padding": "8px",
+  "margin": "5px",
+  "padding-left": "20px",
+  "padding-right": "60%",
+  "font-weight": "bold"});
+$("#error").html("All fields must be filled");
+$("#productId").css("border-color","red");
+$("#productName").css("border-color","red");
+$("#productPrice").css("border-color","red");
+$("#productQuantity").css("border-color","red");
+$("#error").fadeToggle(2000);
+
+}
+
+
+function nameCheck(name){
+  $("#error").css({"background-color": "red", "border-width": "1px",
+                      "border-style": "solid",
+                      "border-radius": "5px",
+                      "padding": "8px",
+                      "margin": "5px",
+                      "padding-left": "20px",
+                      "padding-right": "60%",
+                      "font-weight": "bold"});
+    $("#error").html("Name must be a string");
+    $("#error").fadeToggle(2000);
+  
+}
+
+
+function idCheck(aid,aquan){
+  if(isNaN(aid)){
+    $("#error").css({"background-color": "red", "border-width": "1px",
+                      "border-style": "solid",
+                      "border-radius": "5px",
+                      "padding": "8px",
+                      "margin": "5px",
+                      "padding-left": "20px",
+                      "padding-right": "60%",
+                      "font-weight": "bold"});
+    $("#error").html("ID must be a number");
+    $("#error").fadeToggle(2000);
+  }else{
+    $("#error").css({"background-color": "red", "border-width": "1px",
+                      "border-style": "solid",
+                      "border-radius": "5px",
+                      "padding": "8px",
+                      "margin": "5px",
+                      "padding-left": "20px",
+                      "padding-right": "60%",
+                      "font-weight": "bold"});
+    $("#productId").css("border-color","black");
+    $("#error").html("Quantity must be a number");
+    $("#error").fadeToggle(2000);
 }
 }
 
@@ -103,25 +190,35 @@ function emptyField(id,name,price,quantity){
 console.log("You have entered the emptyfield function");
 if(id.length === 0){
   console.log("Id field is empty")
-  $("#productId").css("border-style","1px solid red");
+  $("#productId").css("border-color","red");
   return -1;
 }
 if(name.length === 0){
 console.log("Name field is empty");
-$("#productName").css("border-style","1px solid red");
+$("#productId").css("border-color","black");
+$("#productName").css("border-color","red");
 return -1;
 }
 if(price.length === 0){
   console.log("Price field is empty");
-  $("#productPrice").css("border-style","1px solid red");
+  $("#productId").css("border-color","black");
+  $("#productName").css("border-color","black");
+  $("#productPrice").css("border-color","red");
   return -1;
 }
 if(quantity.length === 0){
     console.log("quanity field is empty");
-    $("#productQuantity").css("border-style","1px solid red");
+    $("#productId").css("border-color","black");
+    $("#productName").css("border-color","black");
+    $("#productPrice").css("border-color","black");
+    $("#productQuantity").css("border-color","red");
     return -1;
 }else {
   console.log("All fields filled");
+  $("#productId").css("border-color","green");
+  $("#productName").css("border-color","green");
+  $("#productPrice").css("border-color","green");
+  $("#productQuantity").css("border-color","green");
   validation(id, lists);
   return 0;
   
