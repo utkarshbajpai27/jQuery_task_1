@@ -38,7 +38,9 @@ $(document).ready(function(){
         }
       }
       lists.splice(index,1);
+      delMsg();
       display(lists);
+
     }
   });
 
@@ -51,6 +53,20 @@ $(document).ready(function(){
     updateValidation(updateId,updateName,updatePrice,updateQuantity,lists);
   });
 });
+
+function delMsg(){
+  $("#error").css({"background-color": "yellow", "border-width": "1px",
+  "border-style": "solid",
+  "border-radius": "5px",
+  "padding": "8px",
+  "margin": "5px",
+  "padding-left": "20px",
+  "padding-right": "60%",
+  "font-weight": "bold"});
+$("#error").html("Product deleted succesfully exists");
+$("#error").fadeToggle(2000);
+
+}
 
 
 
